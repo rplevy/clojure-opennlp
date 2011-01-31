@@ -1,4 +1,4 @@
-(ns rplevy.opennlp.tools.lazy
+(ns org.clojars.rplevy.opennlp.tools.lazy
   "Tools for lazily separating, tokenizing and tagging sentences.")
 
 

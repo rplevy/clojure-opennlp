@@ -1,4 +1,4 @@
-(ns rplevy.opennlp.tools.filters)
+(ns org.clojars.rplevy.opennlp.tools.filters)
 
 (defmacro pos-filter
   "Declare a filter for pos-tagged vectors with the given name and regex."

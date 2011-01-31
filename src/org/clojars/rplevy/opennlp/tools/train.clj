@@ -1,5 +1,5 @@
 ; Clojure opennlp training functions
-(ns rplevy.opennlp.tools.train
+(ns org.clojars.rplevy.opennlp.tools.train
   (:use [clojure.contrib.io :only [output-stream reader]])
   (:import [opennlp.tools.util PlainTextByLineStream])
   (:import [opennlp.tools.util.model BaseModel ModelType])

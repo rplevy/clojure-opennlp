@@ -1,7 +1,7 @@
 (ns #^{:doc "The main namespace for the clojure-opennlp project. Functions for
   creating NLP performers can be created with the tools in this namespace."
        :author "Lee Hinman"}
-  rplevy.opennlp.nlp
+  org.clojars.rplevy.opennlp.nlp
   (:use [clojure.contrib.seq-utils :only [indexed]])
   (:import [java.io File FileNotFoundException FileInputStream])
   (:import [opennlp.tools.util Span])

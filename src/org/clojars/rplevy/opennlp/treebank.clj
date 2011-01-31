@@ -1,8 +1,8 @@
 (ns #^{:doc "Namespace containing tools pertaining to the treebank NLP tools.
              This includes treebank chuncking, parsing and linking (coref)."
        :author "Lee Hinman"}
-  rplevy.opennlp.treebank
-  (:use [rplevy.opennlp.nlp :only [file-exist? *beam-size*]])
+  org.clojars.rplevy.opennlp.treebank
+  (:use [org.clojars.rplevy.opennlp.nlp :only [file-exist? *beam-size*]])
   (:use [clojure.contrib.seq-utils :only [indexed]])
   (:import [java.io FileNotFoundException FileInputStream])
   (:import [opennlp.tools.chunker ChunkerModel ChunkerME])

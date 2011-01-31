@@ -1,8 +1,8 @@
-(ns rplevy.opennlp.test.treebank
-  (:use [rplevy.opennlp.treebank])
+(ns org.clojars.rplevy.opennlp.test.treebank
+  (:use [org.clojars.rplevy.opennlp.treebank])
   (:use [clojure.test])
-  (:use [rplevy.opennlp.nlp :only [make-tokenizer make-pos-tagger]])
-  (:use [rplevy.opennlp.tools.lazy :only [lazy-chunk]])
+  (:use [org.clojars.rplevy.opennlp.nlp :only [make-tokenizer make-pos-tagger]])
+  (:use [org.clojars.rplevy.opennlp.tools.lazy :only [lazy-chunk]])
   (:import [java.io File FileNotFoundException]))
 
 (def tokenize (make-tokenizer "models/en-token.bin"))

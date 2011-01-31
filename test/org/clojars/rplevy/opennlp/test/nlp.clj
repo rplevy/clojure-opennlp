@@ -1,6 +1,6 @@
-(ns rplevy.opennlp.test.nlp
-  (:use [rplevy.opennlp.nlp])
-  (:use [rplevy.opennlp.tools.lazy])
+(ns org.clojars.rplevy.opennlp.test.nlp
+  (:use [org.clojars.rplevy.opennlp.nlp])
+  (:use [org.clojars.rplevy.opennlp.tools.lazy])
   (:use [clojure.test])
   (:import [java.io File FileNotFoundException]))
 

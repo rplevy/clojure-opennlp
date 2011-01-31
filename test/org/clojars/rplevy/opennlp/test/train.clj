@@ -1,9 +1,9 @@
-(ns rplevy.opennlp.test.train
+(ns org.clojars.rplevy.opennlp.test.train
   "Tests training models for the OpenNLP tools"
   (:use [clojure.test])
-  (:require [rplevy.opennlp.nlp :as nlp]
-            [rplevy.opennlp.treebank :as tb]
-            [rplevy.opennlp.tools.train :as train])
+  (:require [org.clojars.rplevy.opennlp.nlp :as nlp]
+            [org.clojars.rplevy.opennlp.treebank :as tb]
+            [org.clojars.rplevy.opennlp.tools.train :as train])
   (:import [java.io File FileOutputStream]))
 
 (deftest sentence-training-test
