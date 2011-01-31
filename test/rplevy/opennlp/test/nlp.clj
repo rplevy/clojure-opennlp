@@ -1,0 +1,69 @@
+(ns rplevy.opennlp.test.nlp
+  (:use [rplevy.opennlp.nlp])
+  (:use [rplevy.opennlp.tools.lazy])
+  (:use [clojure.test])
+  (:import [java.io File FileNotFoundException]))
+
+(def get-sentences (make-sentence-detector "models/en-sent.bin"))
+(def tokenize (make-tokenizer "models/en-token.bin"))
+(def pos-tag (make-pos-tagger "models/en-pos-maxent.bin"))
+(def name-find (make-name-finder "models/namefind/en-ner-person.bin"))
+#_(def detakenize (make-detokenizer "models/en-???.bin"))
+
+(deftest sentence-split-test
+  (is (= (get-sentences (str "First sentence. Second sentence? Here is another"
+                             " one. And so on and so forth - you get the"
+                             " idea..."))
+         ["First sentence." "Second sentence?" "Here is another one."
+          "And so on and so forth - you get the idea..."]))
+  (is (= (get-sentences "'Hmmm.... now what?' Mr. Green said to H.A.L.")
+         ["'Hmmm.... now what?'" "Mr. Green said to H.A.L."])))
+
+
+(deftest tokenizer-test
+  (is (= (tokenize "First sentence.")
+         ["First" "sentence" "."]))
+  (is (= (tokenize "Mr. Smith gave a car to his son on Friday.")
+         ["Mr." "Smith" "gave" "a" "car" "to" "his" "son" "on" "Friday" "."])))
+
+(deftest pos-tag-test
+  (is (= (pos-tag (tokenize "Mr. Smith gave a car to his son on Friday."))
+         '(["Mr." "NNP"] ["Smith" "NNP"] ["gave" "VBD"] ["a" "DT"] ["car" "NN"]
+             ["to" "TO"] ["his" "PRP$"] ["son" "NN"] ["on" "IN"]
+               ["Friday" "NNP"] ["." "."]))))
+
+(deftest name-finder-test
+  (is (= (name-find (tokenize "My name is Lee, not John"))
+         '("Lee" "John")))
+  (is (= (name-find ["adsf"])
+         '())))
+
+#_(deftest detakenizer-test
+  (is (= 0 0)))
+
+(deftest precondition-test
+  (is (thrown? java.lang.AssertionError (get-sentences 1)))
+  (is (thrown? java.lang.AssertionError (tokenize 1)))
+  (is (thrown? java.lang.AssertionError (pos-tag "foooo")))
+  (is (thrown? java.lang.AssertionError (name-find "asdf"))))
+
+(deftest no-model-file-test
+  (is (thrown? FileNotFoundException (make-sentence-detector "nonexistantfile")))
+  (is (thrown? FileNotFoundException (make-tokenizer "nonexistantfile")))
+  (is (thrown? FileNotFoundException (make-pos-tagger "nonexistantfile")))
+  (is (thrown? FileNotFoundException (make-name-finder "nonexistantfile"))))
+
+(deftest laziness-test
+  (let [s (get-sentences "First sentence. Second sentence?")]
+    (is (= (type (lazy-tokenize s tokenize))
+           clojure.lang.LazySeq))
+    (is (= (first (lazy-tokenize s tokenize))
+           ["First" "sentence" "."]))
+    (is (= (type (lazy-tag s tokenize pos-tag))
+           clojure.lang.LazySeq))
+    (is (= (first (lazy-tag s tokenize pos-tag))
+           '(["First" "RB"] ["sentence" "NN"] ["." "."])))))
+
+
+
+
